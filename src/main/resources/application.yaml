@@ -1,0 +1,13 @@
+---
+management:
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        # Default for all services, but must be overridden in main yaml if more should be included. We add health and prometheus here for clompleteness
+        include: "info, version, prometheus, health"
+  info:
+    git:
+      mode: full
+    diskspace:
+      enabled: false
