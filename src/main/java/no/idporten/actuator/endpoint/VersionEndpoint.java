@@ -1,6 +1,5 @@
 package no.idporten.actuator.endpoint;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.boot.info.BuildProperties;
@@ -16,11 +15,14 @@ import java.util.Optional;
  */
 @Component
 @Endpoint(id = "version", enableByDefault = false)
-@RequiredArgsConstructor
 public class VersionEndpoint {
 
     private static final String VERSION = "version";
     private final Optional<BuildProperties> buildProperties;
+
+    public VersionEndpoint(Optional<BuildProperties> buildProperties) {
+        this.buildProperties = buildProperties;
+    }
 
     @ReadOperation
     public Map<String, Object> version() {
