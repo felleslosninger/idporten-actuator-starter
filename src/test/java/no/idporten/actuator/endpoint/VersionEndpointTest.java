@@ -21,6 +21,7 @@ class VersionEndpointTest {
         BuildProperties buildProperties = mock(BuildProperties.class);
         when(buildProperties.getVersion()).thenReturn("1.0");
         VersionEndpoint versionEndpoint = new VersionEndpoint(Optional.of(buildProperties));
+        assertEquals(1, versionEndpoint.version().size(), "Only one field should show here.");
         assertEquals("1.0", versionEndpoint.version().get("version"));
     }
 
@@ -28,6 +29,7 @@ class VersionEndpointTest {
     @DisplayName("When calling version, and build properties not set, return unknown")
     void testGetVersionUnknown() {
         VersionEndpoint versionEndpoint = new VersionEndpoint(Optional.empty());
+        assertEquals(1, versionEndpoint.version().size(), "Only one field should show here.");
         assertEquals("unknown", versionEndpoint.version().get("version"));
     }
 }

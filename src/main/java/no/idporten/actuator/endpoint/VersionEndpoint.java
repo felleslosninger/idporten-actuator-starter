@@ -14,7 +14,7 @@ import java.util.Optional;
  * Version can also be found in the info-endpoint.
  */
 @Component
-@Endpoint(id = "version", enableByDefault = false)
+@Endpoint(id = "version")
 public class VersionEndpoint {
 
     private static final String VERSION = "version";
