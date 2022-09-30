@@ -47,3 +47,4 @@ You can override/extend the default settings in your application application*.ya
 - prometheus dependency can be removed  
 - any project.version or info.version can be removed from config.
 - remember to check if the build-info goal is set as described in the Configuration section
+- you _may_ use the IDPortenActuatorWebSecurityProperties in place of the WebSecurityProperties, if you have one. Then you don't have to worry about adding new endpoints if the library adds a new one.
