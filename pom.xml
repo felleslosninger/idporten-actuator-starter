@@ -14,7 +14,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring-boot.version>2.7.5</spring-boot.version>
-        <micrometer.prometheus.version>1.9.5</micrometer.prometheus.version>
+        <micrometer.prometheus.version>1.10.1</micrometer.prometheus.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
@@ -22,9 +22,9 @@
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
-        <allure.version>2.19.0</allure.version>
+        <allure.version>2.20.1</allure.version>
         <allure.report.version>2.4.1</allure.report.version>
-        <allure.maven.version>2.11.2</allure.maven.version>
+        <allure.maven.version>2.12.0</allure.maven.version>
     </properties>
 
     <dependencies>
