@@ -2,7 +2,7 @@
 
 [![Maven build status](https://github.com/felleslosninger/idporten-actuator-starter/actions/workflows/call-maventests.yml/badge.svg)](https://github.com/felleslosninger/idporten-actuator-starter/actions/workflows/call-maventests.yml)
 
-This library is a Spring Boot starter defining common actuators in ID-porten. Supported:
+This library is a Spring Boot starter defining common actuators in ID-porten. The actuators will default run on port 8090. Supported:
 
 * /info
 * /version
