@@ -32,7 +32,6 @@ Important: To get the version the project using this starter must configure the 
         </goals>
     </execution>
 </executions>
-
 ```
 
 This will generate a file in the jar-file called build.properties. If this is not set, the version will be set to "
