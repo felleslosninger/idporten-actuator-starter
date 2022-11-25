@@ -2,11 +2,12 @@
 
 [![Maven build status](https://github.com/felleslosninger/idporten-actuator-starter/actions/workflows/call-maventests.yml/badge.svg)](https://github.com/felleslosninger/idporten-actuator-starter/actions/workflows/call-maventests.yml)
 
-This library is a Spring Boot starter defining common actuators in ID-porten. The actuators will default run on port 8090. Supported:
+This library is a Spring Boot starter defining common actuators in ID-porten. The actuators must run on port 8090.
+Supported:
 
+Custom endpoints for
 * /info
 * /version
-* /prometheus (only default config)
 
 Upcoming:
 
@@ -38,14 +39,24 @@ unknown".
 
 ## Overriding default settings
 
-You can override/extend the default settings in your application application*.yaml file, but make sure the default endpoints still work as intended
+You can override/extend the default settings in your application application*.yaml file, but make sure the default
+endpoints still work as intended
 
 ## Porting from own implementation
 
 - remove old info/version implementations under e.g. /actuator
 - the actuators spring starter can be replaced with the idporten-actuator-starter which includes the former.
-- prometheus dependency can be removed  
+- prometheus dependency can be removed
 - any project.version or info.version can be removed from config.
 - remember to check if the build-info goal is set as described in the Configuration section
+- ***IMPORTANT:*** Add minimum the following configuration in your application.yaml:
+```
+    management.server.port=8090
+    management.endpoints.web.base-path=/
+    management.endpoints.web.exposure.include=info,version,prometheus,health
+```
 - TESTS: there might be issues with the tests if you don't have a "root" application.yaml in your test resources, since the management.server.port is set to other than default. It's safest to set ```management.server.port=``` in the test application.yaml to make sure it's set to a random port and that you don't need as many test adjustments. 
-- you _may_ use the IDPortenActuatorWebSecurityProperties in place of the WebSecurityProperties, if you have one. Then you don't have to worry about adding new endpoints if the library adds a new one.
+- you _may_ use the IDPortenActuatorWebSecurityProperties in place of the WebSecurityProperties, for simple access management 
+    - default config is idporten-actuators.security.allowed-list=/health/**,/version,/info,/prometheus, but you can
+      override this in your application.yaml if you want to use the utility class
+
