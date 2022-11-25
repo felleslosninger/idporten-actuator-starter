@@ -14,7 +14,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring-boot.version>2.7.5</spring-boot.version>
-        <micrometer.prometheus.version>1.10.1</micrometer.prometheus.version>
+        <micrometer.prometheus.version>1.10.2</micrometer.prometheus.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
