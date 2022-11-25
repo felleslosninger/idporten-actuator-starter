@@ -50,14 +50,13 @@ endpoints still work as intended
 - any project.version or info.version can be removed from config.
 - remember to check if the build-info goal is set as described in the Configuration section
 - ***IMPORTANT:*** Add minimum the following configuration in your application.yaml:
-
 ```
     management.server.port=8090
     management.endpoints.web.base-path=/
     management.endpoints.web.exposure.include=info,version,prometheus,health
 ```
-
-- you _may_ use the IDPortenActuatorWebSecurityProperties in place of the WebSecurityProperties, if you have one. Then
-  you don't have to worry about adding new endpoints if the library adds a new one.
+- TESTS: there might be issues with the tests if you don't have a "root" application.yaml in your test resources, since the management.server.port is set to other than default. It's safest to set ```management.server.port=``` in the test application.yaml to make sure it's set to a random port and that you don't need as many test adjustments. 
+- you _may_ use the IDPortenActuatorWebSecurityProperties in place of the WebSecurityProperties, for simple access management 
     - default config is idporten-actuators.security.allowed-list=/health/**,/version,/info,/prometheus, but you can
       override this in your application.yaml if you want to use the utility class
+
