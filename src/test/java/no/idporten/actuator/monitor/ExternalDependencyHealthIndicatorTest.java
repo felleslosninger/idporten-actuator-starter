@@ -28,7 +28,7 @@ public class ExternalDependencyHealthIndicatorTest {
     @BeforeEach
     void init() {
         //default
-        when(healthCheckEndpoint.getDownStatus()).thenReturn(CustomStatus.EXTERNAL_DEPENDENCY_DOWN.getCode());
+        when(healthCheckEndpoint.downStatus()).thenReturn(CustomStatus.EXTERNAL_DEPENDENCY_DOWN.getCode());
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ExternalDependencyHealthIndicatorTest {
 
     @Test
     void testHealthCheckNotOkWithMappedDownStatus() {
-        when(healthCheckEndpoint.getDownStatus()).thenReturn("BANAN");
+        when(healthCheckEndpoint.downStatus()).thenReturn("BANAN");
         doReturn(new HealthResponse(Status.DOWN.getCode())).when(externalDependencyHealthIndicator).getIntegrationHealth();
         Health health = externalDependencyHealthIndicator.health();
         assertEquals("BANAN", health.getStatus().getCode());
@@ -62,7 +62,7 @@ public class ExternalDependencyHealthIndicatorTest {
 
     @Test
     void testHealthCheckNotOkWithMappedDownStatus2() {
-        when(healthCheckEndpoint.getDownStatus()).thenReturn("BANAN");
+        when(healthCheckEndpoint.downStatus()).thenReturn("BANAN");
         doThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND)).when(externalDependencyHealthIndicator).getIntegrationHealth();
         Health health = externalDependencyHealthIndicator.health();
         assertEquals("BANAN", health.getStatus().getCode());
