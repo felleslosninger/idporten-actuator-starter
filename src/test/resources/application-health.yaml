@@ -1,0 +1,9 @@
+---
+external-dependency-health-checks:
+  health-endpoints:
+    example:
+      name: example
+      base-uri: https://example.dev
+      endpoint: /health
+      connect-timeout-ms: 2000
+      read-timeout-ms: 1000
