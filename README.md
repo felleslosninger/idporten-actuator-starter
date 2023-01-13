@@ -91,6 +91,9 @@ external-dependency-health-checks:
       read-timeout-ms: 1000
 ```
 
+To avoid any unintended consequences, the health indicators will only return UP, DEGRADED or EXTERNAL_DEPENDENCY_DOWN.
+All of which are 200 OK responses.
+
 If you want to use the Custom health statuses, it is important to add them to the status order depending on your
 application's requirements:
 
