@@ -26,17 +26,17 @@ public class ExternalDependencyHealthIndicator implements HealthIndicator {
             } else if (CustomStatus.DEGRADED.getCode().equals(health.getStatus())) {
                 return Health.status(CustomStatus.DEGRADED).build();
             } else {
-                return Health.status(CustomStatus.EXTERNAL_DEPENDENCY_DOWN).withDetail("status", health.getStatus()).build();
+                return Health.status(healthCheckEndpoint.getDownStatus()).build();
             }
         } catch (HttpClientErrorException e) {
             log.error("Health check to {} failed with exception {}", healthCheckEndpoint.getName(), e.getMessage(), e);
             if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
                 log.error("Wrong configuration of {} health endpoint?", healthCheckEndpoint.getName());
             }
-            return Health.status(CustomStatus.EXTERNAL_DEPENDENCY_DOWN).withException(e).build();
+            return Health.status(healthCheckEndpoint.getDownStatus()).withException(e).build();
         } catch (Exception e) {
             log.error("Health check to {} failed with exception {}", healthCheckEndpoint.getName(), e.getMessage(), e);
-            return Health.status(CustomStatus.EXTERNAL_DEPENDENCY_DOWN).withException(e).build();
+            return Health.status(healthCheckEndpoint.getDownStatus()).withException(e).build();
         }
     }
 

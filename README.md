@@ -82,18 +82,20 @@ external-dependency-health-checks:
       base-uri: [${maskinporten.oauth2.issuer}]()
       endpoint: /health
       connect-timeout-ms: 2000
-      read-timeout-ms: 1000
+      read-timeout-ms: 1000   
     other-api:
       name: otherApi
       base-uri: http://example.com
       endpoint: /health
       connect-timeout-ms: 2000
       read-timeout-ms: 1000
+      map-down-status-to: DOWN
 ```
 
-To avoid any unintended consequences, the health indicators will only return UP, DEGRADED or EXTERNAL_DEPENDENCY_DOWN.
-All of which are 200 OK responses. Overriding the http status code can be done in the default spring management
-settings, for example:
+To avoid any unintended consequences, the health indicators will return UP, DEGRADED or EXTERNAL_DEPENDENCY_DOWN pr
+default. You can configure something other that EXTERNAL_DEPENDENCY_DOWN by setting the down-status property in the
+health endpoint config. All of which are 200 OK responses. Overriding the http status code can be done in the default
+spring management settings, for example:
 
     ```
     management:

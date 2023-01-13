@@ -11,10 +11,10 @@
 
     <properties>
         <spring-boot.version>2.7.7</spring-boot.version>
-        <micrometer.version>1.10.3</micrometer.version>
         <lombok.version>1.18.24</lombok.version>
         <jackson-annotations.version>2.14.1</jackson-annotations.version>
-        <java.version>1.8</java.version>
+        <micrometer.version>1.10.3</micrometer.version>
+        <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -103,14 +103,6 @@
                             <value>true</value>
                         </property>
                     </systemProperties>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-                <version>${allure.maven.version}</version>
-                <configuration>
-                    <reportVersion>${allure.report.version}</reportVersion>
                 </configuration>
             </plugin>
         </plugins>

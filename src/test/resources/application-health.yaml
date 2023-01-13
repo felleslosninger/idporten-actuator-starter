@@ -7,3 +7,4 @@ external-dependency-health-checks:
       endpoint: /health
       connect-timeout-ms: 2000
       read-timeout-ms: 1000
+

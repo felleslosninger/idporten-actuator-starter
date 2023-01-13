@@ -18,7 +18,6 @@ public class HealthCheckConfigTest {
     @Test
     void healthChecksAreConfigured() {
         assertNotNull(applicationContext.getBeanDefinition("exampleHealthCheck"));
-
     }
 
 }
