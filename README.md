@@ -92,7 +92,18 @@ external-dependency-health-checks:
 ```
 
 To avoid any unintended consequences, the health indicators will only return UP, DEGRADED or EXTERNAL_DEPENDENCY_DOWN.
-All of which are 200 OK responses.
+All of which are 200 OK responses. Overriding the http status code can be done in the default spring management
+settings, for example:
+
+    ```
+    management:
+      endpoint:
+        health:
+          status:
+            http-mapping:
+              DEGRADED: 200
+              EXTERNAL_DEPENDENCY_DOWN: 503
+    ```
 
 If you want to use the Custom health statuses, it is important to add them to the status order depending on your
 application's requirements:
