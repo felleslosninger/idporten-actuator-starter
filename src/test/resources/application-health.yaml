@@ -6,5 +6,5 @@ external-dependency-health-checks:
       base-uri: https://example.dev
       endpoint: /health
       connect-timeout-ms: 2000
-      read-timeout-ms: 1000
+     # read-timeout-ms: 1000
 

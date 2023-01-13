@@ -1,6 +1,5 @@
 package no.idporten.actuator.monitor;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -10,9 +9,7 @@ public record HealthCheckEndpoint(@NotNull
                                   String baseUri,
                                   @NotNull
                                   String endpoint,
-                                  @Min(1)
                                   long connectTimeoutMs,
-                                  @Min(1)
                                   long readTimeoutMs,
                                   //the status that will be set if the endpoint returns anything other than UP or DEGRADED
                                   String downStatus)
@@ -23,7 +20,7 @@ public record HealthCheckEndpoint(@NotNull
     }
 
     public long readTimeoutMs() {
-        return this.connectTimeoutMs != -1 ? this.connectTimeoutMs : 2000;
+        return this.readTimeoutMs != -1 ? this.readTimeoutMs : 1000;
     }
 
     public String downStatus() {
