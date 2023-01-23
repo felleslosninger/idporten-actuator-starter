@@ -6,23 +6,19 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.support.GenericApplicationContext;
-import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
-@ActiveProfiles("health")
-public class HealthCheckConfigTest {
+public class NoHealthCheckConfigTest {
 
     @Autowired
     GenericApplicationContext applicationContext;
 
     @Test
-    @DisplayName("Should create a health check bean for each configured health check")
-    void healthChecksAreConfigured() {
-        assertEquals(1, applicationContext.getBeanNamesForType(ExternalDependencyHealthIndicator.class).length);
-        assertNotNull(applicationContext.getBeanDefinition("exampleHealthCheck"));
+    @DisplayName("Should not create any health check beans when no health checks are configured and not throw exception")
+    void dontfailIfNoHealthChecksConfigures() {
+        assertEquals(0, applicationContext.getBeanNamesForType(ExternalDependencyHealthIndicator.class).length);
     }
 
 }
