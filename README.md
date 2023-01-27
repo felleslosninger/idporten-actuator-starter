@@ -79,7 +79,7 @@ external-dependency-health-checks:
   health-endpoints:
     maskinporten:
       name: maskinporten
-      base-uri: [${maskinporten.oauth2.issuer}]()
+      base-uri: ${maskinporten.oauth2.issuer}
       endpoint: /health
       connect-timeout-ms: 2000
       read-timeout-ms: 1000   
