@@ -89,7 +89,7 @@ external-dependency-health-checks:
       endpoint: /health
       connect-timeout-ms: 2000
       read-timeout-ms: 1000
-      map-down-status-to: DOWN
+      map-down-status-to: DOWN  (optional. can be set to any string)
 ```
 
 To avoid any unintended consequences, the health indicators will return UP, DEGRADED or EXTERNAL_DEPENDENCY_DOWN pr
