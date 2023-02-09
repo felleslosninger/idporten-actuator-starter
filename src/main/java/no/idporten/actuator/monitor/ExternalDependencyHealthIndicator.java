@@ -59,4 +59,8 @@ public class ExternalDependencyHealthIndicator implements HealthIndicator {
         return this.healthCheckEndpoint.name();
     }
 
+    public String getDownStatusMapping() {
+        return healthCheckEndpoint.downStatus();
+    }
+
 }

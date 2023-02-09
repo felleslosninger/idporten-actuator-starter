@@ -23,6 +23,8 @@ public class HealthCheckConfigTest {
     void healthChecksAreConfigured() {
         assertEquals(1, applicationContext.getBeanNamesForType(ExternalDependencyHealthIndicator.class).length);
         assertNotNull(applicationContext.getBeanDefinition("exampleHealthCheck"));
+        ExternalDependencyHealthIndicator exampleHealthCheck = applicationContext.getBean("exampleHealthCheck", ExternalDependencyHealthIndicator.class);
+        assertEquals("SOMMER", exampleHealthCheck.getDownStatusMapping());
     }
 
 }
