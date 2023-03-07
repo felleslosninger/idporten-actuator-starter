@@ -10,7 +10,7 @@
     <description>Library for ID-porten actuators</description>
 
     <properties>
-        <spring-boot.version>2.7.7</spring-boot.version>
+        <spring-boot.version>3.0.4</spring-boot.version>
         <lombok.version>1.18.24</lombok.version>
         <jackson-annotations.version>2.14.1</jackson-annotations.version>
         <micrometer.version>1.10.4</micrometer.version>
