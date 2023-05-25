@@ -42,11 +42,8 @@ public class HealthCheckEndpointConfig implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        if (healthCheckEndpointProperties.healthEndpoints() == null || healthCheckEndpointProperties.healthEndpoints().isEmpty()) {
-            log.info("No health check endpoints configured");
-        } else {
+        if (healthCheckEndpointProperties.healthEndpoints() != null && !healthCheckEndpointProperties.healthEndpoints().isEmpty()) {
             log.info("Configured health check endpoints: {}", healthCheckEndpointProperties.healthEndpoints().keySet());
         }
-
     }
 }
