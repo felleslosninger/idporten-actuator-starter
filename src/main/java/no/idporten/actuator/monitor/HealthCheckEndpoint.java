@@ -12,7 +12,7 @@ public record HealthCheckEndpoint(@NotNull
                                   long connectTimeoutMs,
                                   long readTimeoutMs,
                                   //the status that will be set if the endpoint returns anything other than UP or DEGRADED
-                                  String downStatus)
+                                  String mapDownStatusTo)
         implements Serializable {
 
     public long connectTimeoutMs() {
@@ -24,7 +24,7 @@ public record HealthCheckEndpoint(@NotNull
     }
 
     public String downStatus() {
-        return this.downStatus != null ? this.downStatus : CustomStatus.EXTERNAL_DEPENDENCY_DOWN.getCode();
+        return this.mapDownStatusTo != null ? this.mapDownStatusTo : CustomStatus.EXTERNAL_DEPENDENCY_DOWN.getCode();
     }
 
 }
