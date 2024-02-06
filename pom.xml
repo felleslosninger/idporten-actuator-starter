@@ -21,7 +21,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
-        <surefire.plugin.version>3.2.2</surefire.plugin.version>
+        <surefire.plugin.version>3.2.5</surefire.plugin.version>
     </properties>
 
     <dependencies>
