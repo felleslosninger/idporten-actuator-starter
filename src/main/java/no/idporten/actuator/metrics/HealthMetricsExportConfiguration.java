@@ -19,20 +19,20 @@ public class HealthMetricsExportConfiguration {
     private int getStatusCode(HealthEndpoint health) {
         Status status = health.health().getStatus();
         if (Status.UP.equals(status)) {
-            return 5;
+            return 0;
         }
         if (EXTERNAL_DEPENDENCY_DOWN.equals(status)) {
-            return 4;
-        }
-        if (DEGRADED.equals(status)) {
-            return 3;
-        }
-        if (OUT_OF_SERVICE.equals(status)) {
-            return 2;
-        }
-        if (Status.DOWN.equals(status)) {
             return 1;
         }
-        return 0;
+        if (DEGRADED.equals(status)) {
+            return 1;
+        }
+        if (OUT_OF_SERVICE.equals(status)) {
+            return 1;
+        }
+        if (Status.DOWN.equals(status)) {
+            return 2;
+        }
+        return 100; // Unknown status
     }
 }
