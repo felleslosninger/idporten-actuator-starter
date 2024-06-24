@@ -10,10 +10,8 @@
     <description>Library for ID-porten actuators</description>
 
     <properties>
-        <spring-boot.version>2.7.18</spring-boot.version>
-        <lombok.version>1.18.24</lombok.version>
-        <jackson-annotations.version>2.14.1</jackson-annotations.version>
-        <micrometer.version>1.13.0</micrometer.version>
+        <spring-boot.version>3.3.1</spring-boot.version>
+        <micrometer.version>1.13.1</micrometer.version>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -21,7 +19,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
-        <surefire.plugin.version>3.2.5</surefire.plugin.version>
+        <surefire.plugin.version>3.3.0</surefire.plugin.version>
+        <mockito-inline.version>5.2.0</mockito-inline.version>
     </properties>
 
     <dependencies>
@@ -38,7 +37,6 @@
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
-            <version>${micrometer.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -56,6 +54,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-inline</artifactId>
+            <version>${mockito-inline.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -69,6 +68,11 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <version>${micrometer.version}</version>
+        </dependency>
         </dependencies>
     </dependencyManagement>
 
