@@ -11,6 +11,7 @@
 
     <properties>
         <spring-boot.version>3.3.1</spring-boot.version>
+        <micrometer.version>1.13.1</micrometer.version>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -35,7 +36,6 @@
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
-            <version>${micrometer.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -66,6 +66,11 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <version>${micrometer.version}</version>
+        </dependency>
         </dependencies>
     </dependencyManagement>
 
