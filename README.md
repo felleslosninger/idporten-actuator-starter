@@ -119,7 +119,9 @@ management:
 ```
 
 ### Description of health statuses
-|| Status || Description || Status type ||
+
+| Status | Description | Status type |
+| ----------- | ----------- | ----------- |
 | DOWN | The application is down and not working at all | Default |
 | OUT_OF_SERVICE | The application is running, but not in use | Default status |
 | UNKNOWN | The application status is unknown | Default |
