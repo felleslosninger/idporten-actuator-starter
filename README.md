@@ -128,3 +128,5 @@ management:
 | DEGRADED | The application has functionally or parts not working, but working okay for most cases | Custom |
 | EXTERNAL_DEPENDENCY_DOWN | An external dependency the application depends on is down, e.g. an API | Custom |
 | UP | The application is up and working fine | Default |
+
+For more info see Spring Boot doc: https://docs.spring.io/spring-boot/api/java/org/springframework/boot/actuate/health/Status.html
