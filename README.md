@@ -123,7 +123,7 @@ management:
 | Status | Description | Status type |
 | ----------- | ----------- | ----------- |
 | DOWN | The application is down and not working at all | Default |
-| OUT_OF_SERVICE | The application is running, but not in use | Default status |
+| OUT_OF_SERVICE | The application or subsystem has been taken out of service and should not be used. | Default status |
 | UNKNOWN | The application status is unknown | Default |
 | DEGRADED | The application has functionally or parts not working, but working okay for most cases | Custom |
 | EXTERNAL_DEPENDENCY_DOWN | An external dependency the application depends on is down, e.g. an API | Custom |
