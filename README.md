@@ -9,15 +9,15 @@ Custom endpoints for
 * /info
 * /version
 
-Upcoming:
+ID-porten default configuration for:
 
-* /health (default implementation for now)
+* /health
 
 ## Requirements
 
 To build the application you need:
 
-* JDK 1.8 (to support application with older Java versions)
+* JDK 17 (to support application with older Java versions)
 * Maven
 
 ## Configuration
@@ -69,7 +69,7 @@ management:
     - default config is idporten-actuators.security.allowed-list=/health/**,/version,/info,/prometheus, but you can
       override this in your application.yaml if you want to use the utility class
 
-## Configuring up some simple http health checks
+## Configuring some simple http health checks
 
 If your application has external dependencies, you can configure the health check for these as shown in the example
 below.
@@ -117,3 +117,16 @@ management:
       status:
         order: DOWN, OUT_OF_SERVICE, UNKNOWN, DEGRADED, EXTERNAL_DEPENDENCY_DOWN, UP
 ```
+
+### Description of health statuses
+
+| Status | Description | Status type |
+| ----------- | ----------- | ----------- |
+| DOWN | The application is down and not working at all | Default |
+| OUT_OF_SERVICE | The application or subsystem has been taken out of service and should not be used. | Default status |
+| UNKNOWN | The application status is unknown | Default |
+| DEGRADED | The application has functionally or parts not working, but working okay for most cases | Custom |
+| EXTERNAL_DEPENDENCY_DOWN | An external dependency the application depends on is down, e.g. an API | Custom |
+| UP | The application is up and working fine | Default |
+
+For more info see Spring Boot doc: https://docs.spring.io/spring-boot/api/java/org/springframework/boot/actuate/health/Status.html
