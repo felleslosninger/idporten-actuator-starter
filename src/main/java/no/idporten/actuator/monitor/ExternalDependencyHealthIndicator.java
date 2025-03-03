@@ -20,6 +20,7 @@ public class ExternalDependencyHealthIndicator implements HealthIndicator {
     public ExternalDependencyHealthIndicator(RestTemplate restTemplate, HealthCheckEndpoint healthCheckEndpoint) {
         this.restTemplate = restTemplate;
         this.healthCheckEndpoint = healthCheckEndpoint;
+        log.info("Created health indicator for {}", healthCheckEndpoint.name());
     }
 
     @Override
