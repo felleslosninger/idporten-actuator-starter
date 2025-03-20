@@ -1,19 +1,23 @@
 package no.idporten.actuator.monitor;
 
-import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Objects;
 
-public record HealthCheckEndpoint(@NotNull
+public record HealthCheckEndpoint(
                                   String name,
-                                  @NotNull
                                   String baseUri,
-                                  @NotNull
                                   String endpoint,
                                   long connectTimeoutMs,
                                   long readTimeoutMs,
                                   //the status that will be set if the endpoint returns anything other than UP or DEGRADED
                                   String mapDownStatusTo)
         implements Serializable {
+
+    public HealthCheckEndpoint {
+        Objects.requireNonNull(name, "name must not be null");
+        Objects.requireNonNull(baseUri, "baseUri must not be null");
+        Objects.requireNonNull(endpoint, "endpoint must not be null");
+    }
 
     public long connectTimeoutMs() {
         return this.connectTimeoutMs != -1 ? this.connectTimeoutMs : 2000;
