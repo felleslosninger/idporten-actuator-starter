@@ -10,7 +10,7 @@
     <description>Library for ID-porten actuators</description>
 
     <properties>
-        <spring-boot.version>3.3.1</spring-boot.version>
+        <spring-boot.version>3.4.3</spring-boot.version>
         <micrometer.version>1.14.5</micrometer.version>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -115,12 +115,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>difi-artifactory</id>
-            <name>libs-release</name>
-            <url>http://eid-artifactory.dmz.local:8080/artifactory/libs-release</url>
-        </repository>
-    </repositories>
 </project>
