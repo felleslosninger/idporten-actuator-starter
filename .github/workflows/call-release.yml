@@ -1,0 +1,14 @@
+name: Release to github packages
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  call-workflow-maven-deploy:
+    uses: felleslosninger/github-workflows/.github/workflows/ci-maven-deploy.yml@main
+    with:
+      java-version: 21
+      package-version: ${{ github.event.release.tag_name }}
+      deployment-repository: ${{ github.repository }}
+    secrets: inherit
