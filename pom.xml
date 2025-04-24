@@ -19,7 +19,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
-        <surefire.plugin.version>3.5.2</surefire.plugin.version>
+        <surefire.plugin.version>3.5.3</surefire.plugin.version>
         <mockito-inline.version>5.2.0</mockito-inline.version>
     </properties>
 
