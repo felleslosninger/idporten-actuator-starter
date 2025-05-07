@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @ActiveProfiles("health")
-public class HealthCheckConfigTest {
+class HealthCheckConfigTest {
 
     @Autowired
     GenericApplicationContext applicationContext;

@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
-public class ExternalDependencyHealthIndicatorTest {
+class ExternalDependencyHealthIndicatorTest {
 
     @Mock
     private HealthCheckEndpoint healthCheckEndpoint;

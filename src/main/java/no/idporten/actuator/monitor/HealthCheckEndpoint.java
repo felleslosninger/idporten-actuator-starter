@@ -1,10 +1,13 @@
 package no.idporten.actuator.monitor;
 
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 public record HealthCheckEndpoint(
                                   String name,
+                                  @DefaultValue("true") boolean enabled,
                                   String baseUri,
                                   String endpoint,
                                   long connectTimeoutMs,

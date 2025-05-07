@@ -1,6 +1,7 @@
 package no.idporten.actuator.config;
 
 import no.idporten.actuator.monitor.ExternalDependencyHealthIndicator;
+import no.idporten.actuator.monitor.HealthCheckEndpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -25,6 +26,8 @@ public class HealthCheckEndpointConfig implements InitializingBean {
         this.healthCheckEndpointProperties = healthCheckEndpointProperties;
         if (healthCheckEndpointProperties.healthEndpoints() != null) {
             healthCheckEndpointProperties.healthEndpoints().values()
+                    .stream()
+                    .filter(HealthCheckEndpoint::enabled)
                     .forEach(healthCheckEndpoint -> {
                         log.info("Registering health check for {}", healthCheckEndpoint.name());
                         applicationContext.registerBean(healthCheckEndpoint.name() + "HealthCheck", ExternalDependencyHealthIndicator.class, () -> {

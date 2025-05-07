@@ -10,7 +10,7 @@ import org.springframework.context.support.GenericApplicationContext;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class NoHealthCheckConfigTest {
+class NoHealthCheckConfigTest {
 
     @Autowired
     GenericApplicationContext applicationContext;
