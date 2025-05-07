@@ -8,4 +8,11 @@ external-dependency-health-checks:
       connect-timeout-ms: 2000
      # read-timeout-ms: 1000
       map-down-status-to: SOMMER
-
+    disabled-example:
+      name: disabled-example
+      enabled: false
+      base-uri: https://junit.no
+      endpoint: /health
+      connect-timeout-ms: 2000
+      # read-timeout-ms: 1000
+      map-down-status-to: VINTER
