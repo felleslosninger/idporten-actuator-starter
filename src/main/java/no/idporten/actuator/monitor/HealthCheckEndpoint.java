@@ -17,9 +17,11 @@ public record HealthCheckEndpoint(
         implements Serializable {
 
     public HealthCheckEndpoint {
-        Objects.requireNonNull(name, "name must not be null");
-        Objects.requireNonNull(baseUri, "baseUri must not be null");
-        Objects.requireNonNull(endpoint, "endpoint must not be null");
+        if(enabled) {
+            Objects.requireNonNull(name, "name must not be null");
+            Objects.requireNonNull(baseUri, "baseUri must not be null");
+            Objects.requireNonNull(endpoint, "endpoint must not be null");
+        }
     }
 
     public long connectTimeoutMs() {
