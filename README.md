@@ -17,7 +17,7 @@ ID-porten default configuration for:
 
 To build the application you need:
 
-* JDK 17 (to support application with older Java versions)
+* JDK 21 (to support application with older Java versions)
 * Maven
 
 ## Configuration
