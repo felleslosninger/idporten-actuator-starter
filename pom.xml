@@ -11,7 +11,7 @@
 
     <properties>
         <spring-boot.version>3.4.3</spring-boot.version>
-        <micrometer.version>1.14.6</micrometer.version>
+        <micrometer.version>1.15.0</micrometer.version>
         <java.version>21</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
