@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: idporten-actuator-starter
+  description: Spring Boot starter for configuring actuator endpoints
+spec:
+  type: library
+  lifecycle: production
+  owner: team-idporten
