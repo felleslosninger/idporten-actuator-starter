@@ -6,8 +6,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
-import org.springframework.boot.actuate.health.Health;
-import org.springframework.boot.actuate.health.Status;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.health.contributor.Health;
+import org.springframework.boot.health.contributor.Status;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.HttpClientErrorException;
@@ -15,7 +16,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith({SpringExtension.class, MockitoExtension.class})
 class ExternalDependencyHealthIndicatorTest {
 
     @Mock
@@ -28,7 +29,7 @@ class ExternalDependencyHealthIndicatorTest {
     @BeforeEach
     void init() {
         //default
-        when(healthCheckEndpoint.downStatus()).thenReturn(CustomStatus.EXTERNAL_DEPENDENCY_DOWN.getCode());
+        lenient().when(healthCheckEndpoint.downStatus()).thenReturn(CustomStatus.EXTERNAL_DEPENDENCY_DOWN.getCode());
     }
 
     @Test

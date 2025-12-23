@@ -2,13 +2,12 @@ package no.idporten.actuator.metrics;
 
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
-import org.springframework.boot.actuate.health.HealthEndpoint;
-import org.springframework.boot.actuate.health.Status;
+import org.springframework.boot.health.actuate.endpoint.HealthEndpoint;
+import org.springframework.boot.health.contributor.Status;
 import org.springframework.context.annotation.Configuration;
 
 import static no.idporten.actuator.monitor.CustomStatus.DEGRADED;
 import static no.idporten.actuator.monitor.CustomStatus.EXTERNAL_DEPENDENCY_DOWN;
-import static org.springframework.boot.actuate.health.Status.OUT_OF_SERVICE;
 
 @Configuration(proxyBeanMethods = false)
 public class HealthMetricsExportConfiguration {
@@ -27,7 +26,7 @@ public class HealthMetricsExportConfiguration {
         if (DEGRADED.equals(status)) {
             return 1;
         }
-        if (OUT_OF_SERVICE.equals(status)) {
+        if (Status.OUT_OF_SERVICE.equals(status)) {
             return 1;
         }
         if (Status.DOWN.equals(status)) {

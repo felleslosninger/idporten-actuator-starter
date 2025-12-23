@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.boot.restclient.RestTemplateBuilder;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.http.HttpHeaders;
@@ -34,8 +34,8 @@ public class HealthCheckEndpointConfig implements InitializingBean {
                             RestTemplateBuilder builder = new RestTemplateBuilder();
                             RestTemplate restTemplate = builder.rootUri(healthCheckEndpoint.baseUri())
                                     .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-                                    .setConnectTimeout(Duration.ofMillis(healthCheckEndpoint.connectTimeoutMs()))
-                                    .setReadTimeout(Duration.ofMillis(healthCheckEndpoint.readTimeoutMs()))
+                                    .connectTimeout(Duration.ofMillis(healthCheckEndpoint.connectTimeoutMs()))
+                                    .readTimeout(Duration.ofMillis(healthCheckEndpoint.readTimeoutMs()))
                                     .build();
                             return new ExternalDependencyHealthIndicator(restTemplate, healthCheckEndpoint);
                         });
