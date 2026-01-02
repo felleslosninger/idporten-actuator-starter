@@ -13,6 +13,13 @@ ID-porten default configuration for:
 
 * /health
 
+## Version Compatibility
+
+| Library Version | Spring Boot Version |
+|-----------------|---------------------|
+| 2.x.x           | 3.x                 |
+| 3.x.x           | 4.x                 |
+
 ## Requirements
 
 To build the application you need:
