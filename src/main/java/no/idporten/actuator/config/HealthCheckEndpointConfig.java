@@ -6,13 +6,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.http.client.JdkClientHttpRequestFactory;
+import org.springframework.web.client.RestClient;
 
+import java.net.http.HttpClient;
 import java.time.Duration;
 
 
@@ -31,13 +32,18 @@ public class HealthCheckEndpointConfig implements InitializingBean {
                     .forEach(healthCheckEndpoint -> {
                         log.info("Registering health check for {}", healthCheckEndpoint.name());
                         applicationContext.registerBean(healthCheckEndpoint.name() + "HealthCheck", ExternalDependencyHealthIndicator.class, () -> {
-                            RestTemplateBuilder builder = new RestTemplateBuilder();
-                            RestTemplate restTemplate = builder.rootUri(healthCheckEndpoint.baseUri())
-                                    .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-                                    .setConnectTimeout(Duration.ofMillis(healthCheckEndpoint.connectTimeoutMs()))
-                                    .setReadTimeout(Duration.ofMillis(healthCheckEndpoint.readTimeoutMs()))
+                            HttpClient httpClient = HttpClient.newBuilder()
+                                    .connectTimeout(Duration.ofMillis(healthCheckEndpoint.connectTimeoutMs()))
                                     .build();
-                            return new ExternalDependencyHealthIndicator(restTemplate, healthCheckEndpoint);
+                            JdkClientHttpRequestFactory requestFactory = new JdkClientHttpRequestFactory(httpClient);
+                            requestFactory.setReadTimeout(Duration.ofMillis(healthCheckEndpoint.readTimeoutMs()));
+
+                            RestClient restClient = RestClient.builder()
+                                    .baseUrl(healthCheckEndpoint.baseUri())
+                                    .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                                    .requestFactory(requestFactory)
+                                    .build();
+                            return new ExternalDependencyHealthIndicator(restClient, healthCheckEndpoint);
                         });
                     });
         }

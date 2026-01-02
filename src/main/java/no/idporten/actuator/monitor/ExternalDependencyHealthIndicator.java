@@ -1,24 +1,23 @@
 package no.idporten.actuator.monitor;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.actuate.health.Health;
-import org.springframework.boot.actuate.health.HealthIndicator;
-import org.springframework.boot.actuate.health.Status;
+import org.springframework.boot.health.contributor.Health;
+import org.springframework.boot.health.contributor.HealthIndicator;
+import org.springframework.boot.health.contributor.Status;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClient;
 
 public class ExternalDependencyHealthIndicator implements HealthIndicator {
 
     private final Logger log = LoggerFactory.getLogger(ExternalDependencyHealthIndicator.class);
-    private final RestTemplate restTemplate;
+    private final RestClient restClient;
     private final HealthCheckEndpoint healthCheckEndpoint;
 
-    public ExternalDependencyHealthIndicator(RestTemplate restTemplate, HealthCheckEndpoint healthCheckEndpoint) {
-        this.restTemplate = restTemplate;
+    public ExternalDependencyHealthIndicator(RestClient restClient, HealthCheckEndpoint healthCheckEndpoint) {
+        this.restClient = restClient;
         this.healthCheckEndpoint = healthCheckEndpoint;
         log.info("Created health indicator for {}", healthCheckEndpoint.name());
     }
@@ -47,8 +46,11 @@ public class ExternalDependencyHealthIndicator implements HealthIndicator {
     }
 
     protected HealthResponse getIntegrationHealth() {
-        ResponseEntity<HealthResponse> forEntity = this.restTemplate.getForEntity(healthCheckEndpoint.endpoint(),
-                HealthResponse.class);
+        ResponseEntity<HealthResponse> forEntity = this.restClient.get()
+                .uri(healthCheckEndpoint.endpoint())
+                .retrieve()
+                .toEntity(HealthResponse.class);
+
         if (forEntity.getBody() != null) {
             return forEntity.getBody();
         } else {
