@@ -1,6 +1,6 @@
 package no.idporten.actuator.monitor;
 
-import org.springframework.boot.actuate.health.Status;
+import org.springframework.boot.health.contributor.Status;
 
 import java.io.Serializable;
 
