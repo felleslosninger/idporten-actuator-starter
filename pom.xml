@@ -9,6 +9,9 @@
     <packaging>pom</packaging>
     <name>idporten-actuator-starter-parent</name>
     <description>Parent module for ID-porten actuators</description>
+
+    <!-- Reference: Multi-module access-log@2.2.0 -->
+    <!-- https://github.com/felleslosninger/idporten-access-log-spring-boot-starter/ -->
     <modules>
         <module>idporten-actuator-starter</module>
         <module>idporten-actuator-4-starter</module>
