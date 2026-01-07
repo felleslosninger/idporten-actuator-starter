@@ -2,7 +2,7 @@
 
 [![Maven build status](https://github.com/felleslosninger/idporten-actuator-starter/actions/workflows/call-maventests.yml/badge.svg)](https://github.com/felleslosninger/idporten-actuator-starter/actions/workflows/call-maventests.yml)
 
-This library is a Spring Boot starter defining common actuators in ID-porten. The actuators must run on port 8090.
+This repository contains two Spring Boot starter modules providing common actuators in ID-porten. The actuators must run on port 8090.
 Supported:
 
 Custom endpoints for
@@ -12,6 +12,15 @@ Custom endpoints for
 ID-porten default configuration for:
 
 * /health
+
+## Provided artifacts
+From stable version ``3.0.0`` the following artifacts are provided:
+
+| Package Coordinates                                | Description     | 
+|----------------------------------------------------|-----------------|
+| `no.idporten.actuator.idporten-actuator-starter`   | Spring Boot 3.x |
+| `no.idporten.actuator.idporten-actuator-4-starter` | Spring Boot 4.x |
+
 
 ## Requirements
 

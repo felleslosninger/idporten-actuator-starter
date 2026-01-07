@@ -7,8 +7,8 @@
         <version>DEV-SNAPSHOT</version>
     </parent>
     <artifactId>idporten-actuator-4-starter</artifactId>
-    <name>idporten-actuator-4-starter</name>
-    <url>http://maven.apache.org</url>
+    <name>idporten-actuator-4-starter - Spring 4.x</name>
+    <description>Spring Boot 4 starter for ID-porten actuators</description>
 
     <properties>
         <argLine/> <!-- needed by surefire plugin-->

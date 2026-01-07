@@ -8,7 +8,7 @@
     <version>DEV-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>idporten-actuator-starter-parent</name>
-    <description>Library for ID-porten actuators</description>
+    <description>Parent module for ID-porten actuators</description>
     <modules>
         <module>idporten-actuator-starter</module>
         <module>idporten-actuator-4-starter</module>
