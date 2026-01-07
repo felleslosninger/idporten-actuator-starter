@@ -4,104 +4,58 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>no.idporten.actuator</groupId>
-    <artifactId>idporten-actuator-starter</artifactId>
+    <artifactId>idporten-actuator-starter-parent</artifactId>
     <version>DEV-SNAPSHOT</version>
-    <name>idporten-actuator-starter</name>
-    <description>Library for ID-porten actuators</description>
+    <packaging>pom</packaging>
+    <name>idporten-actuator-starter-parent</name>
+    <description>Parent module for ID-porten actuators</description>
+
+    <!-- Reference: Multi-module access-log@2.2.0 -->
+    <!-- https://github.com/felleslosninger/idporten-access-log-spring-boot-starter/tree/2.2.0 -->
+    <modules>
+        <module>idporten-actuator-starter</module>
+        <module>idporten-actuator-4-starter</module>
+    </modules>
 
     <properties>
-        <argLine/> <!-- needed by surefire plugin-->
-        <spring-boot.version>4.0.1</spring-boot.version>
-        <micrometer.version>1.16.0</micrometer.version>
         <java.version>21</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- maven plugins -->
         <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
-        <maven-surefire.plugin.version>3.5.4</maven-surefire.plugin.version>
-        <mockito-core.version>5.14.0</mockito-core.version>
+        <maven-resources-plugin.version>3.4.0</maven-resources-plugin.version>
+        <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
+        <maven-deploy-plugin.version>3.1.2</maven-deploy-plugin.version>
+
+        <argLine/> <!-- needed by surefire plugin-->
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.logging.log4j</groupId>
-                    <artifactId>log4j-to-slf4j</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-registry-prometheus</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webmvc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-restclient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webmvc-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-restclient-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>${mockito-core.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.micrometer</groupId>
-                <artifactId>micrometer-registry-prometheus</artifactId>
-                <version>${micrometer.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <build>
+        <finalName>${project.artifactId}</finalName>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <compilerArgs>
-                        <arg>-parameters</arg>
-                    </compilerArgs>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration> <!-- temporary fix for sbom-action not supporting multiple paths -->
+                    <outputDirectory>${maven.multiModuleProjectDirectory}/target/${project.artifactId}</outputDirectory>
                 </configuration>
             </plugin>
-            <plugin> <!-- attach source package -->
+
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>${maven-source-plugin.version}</version>
@@ -117,29 +71,33 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>properties</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire.plugin.version}</version>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.version}</version>
                 <configuration>
-                    <testFailureIgnore>false</testFailureIgnore>
-                    <systemPropertyVariables>
-                        <property>
-                            <name>junit.jupiter.extensions.autodetection.enabled</name>
-                            <value>true</value>
-                        </property>
-                    </systemPropertyVariables>
-                    <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
+                    <delimiters>
+                        <delimiter>@</delimiter>
+                    </delimiters>
+                    <useDefaultDelimiters>false</useDefaultDelimiters>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${maven-deploy-plugin.version}</version>
+            </plugin>
+
         </plugins>
     </build>
+
 </project>
