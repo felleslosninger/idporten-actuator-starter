@@ -11,7 +11,7 @@
     <description>Spring Boot 3 starter for ID-porten actuators</description>
 
     <properties>
-        <spring-boot.version>3.4.13</spring-boot.version>
+        <spring-boot.version>4.0.1</spring-boot.version>
         <micrometer.version>1.14.6</micrometer.version>
         <mockito-inline.version>5.2.0</mockito-inline.version>
     </properties>
