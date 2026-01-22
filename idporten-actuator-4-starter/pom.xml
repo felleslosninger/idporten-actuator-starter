@@ -12,7 +12,7 @@
 
     <properties>
         <argLine/> <!-- needed by surefire plugin-->
-        <spring-boot.version>4.0.1</spring-boot.version>
+        <spring-boot.version>4.0.2</spring-boot.version>
         <micrometer.version>1.16.0</micrometer.version>
         <mockito-core.version>5.14.0</mockito-core.version>
     </properties>
