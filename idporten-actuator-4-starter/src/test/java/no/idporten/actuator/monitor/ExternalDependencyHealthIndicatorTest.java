@@ -77,6 +77,13 @@ class ExternalDependencyHealthIndicatorTest {
     }
 
     @Test
+    void testHealthCheckNullBody() {
+        doReturn(null).when(externalDependencyHealthIndicator).getIntegrationHealth();
+        Health health = externalDependencyHealthIndicator.health();
+        assertEquals(CustomStatus.EXTERNAL_DEPENDENCY_DOWN, health.getStatus());
+    }
+
+    @Test
     void testOverrideDownStatus() {
         when(healthCheckEndpoint.downStatus()).thenReturn("BANAN");
         doReturn(new HealthResponse(Status.DOWN.getCode())).when(externalDependencyHealthIndicator).getIntegrationHealth();
