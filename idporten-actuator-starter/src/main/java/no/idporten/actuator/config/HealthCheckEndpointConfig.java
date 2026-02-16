@@ -6,14 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.web.client.RestTemplate;
-
-import java.time.Duration;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.web.client.RestClient;
 
 
 @Configuration
@@ -31,13 +29,15 @@ public class HealthCheckEndpointConfig implements InitializingBean {
                     .forEach(healthCheckEndpoint -> {
                         log.info("Registering health check for {}", healthCheckEndpoint.name());
                         applicationContext.registerBean(healthCheckEndpoint.name() + "HealthCheck", ExternalDependencyHealthIndicator.class, () -> {
-                            RestTemplateBuilder builder = new RestTemplateBuilder();
-                            RestTemplate restTemplate = builder.rootUri(healthCheckEndpoint.baseUri())
+                            SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+                            requestFactory.setConnectTimeout(safeIntCast(healthCheckEndpoint.connectTimeoutMs()));
+                            requestFactory.setReadTimeout(safeIntCast(healthCheckEndpoint.readTimeoutMs()));
+                            RestClient restClient = RestClient.builder()
+                                    .baseUrl(healthCheckEndpoint.baseUri())
                                     .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-                                    .setConnectTimeout(Duration.ofMillis(healthCheckEndpoint.connectTimeoutMs()))
-                                    .setReadTimeout(Duration.ofMillis(healthCheckEndpoint.readTimeoutMs()))
+                                    .requestFactory(requestFactory)
                                     .build();
-                            return new ExternalDependencyHealthIndicator(restTemplate, healthCheckEndpoint);
+                            return new ExternalDependencyHealthIndicator(restClient, healthCheckEndpoint);
                         });
                     });
         }
@@ -48,5 +48,14 @@ public class HealthCheckEndpointConfig implements InitializingBean {
         if (healthCheckEndpointProperties.healthEndpoints() != null && !healthCheckEndpointProperties.healthEndpoints().isEmpty()) {
             log.info("Configured health check endpoints: {}", healthCheckEndpointProperties.healthEndpoints().keySet());
         }
+    }
+
+    private int safeIntCast(long value) {
+        if (value > Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        } else if (value < Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
+        }
+        return (int) value;
     }
 }

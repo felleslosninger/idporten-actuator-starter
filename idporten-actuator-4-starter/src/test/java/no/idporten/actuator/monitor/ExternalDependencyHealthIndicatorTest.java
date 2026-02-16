@@ -10,7 +10,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.health.contributor.Health;
 import org.springframework.boot.health.contributor.Status;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.HttpClientErrorException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -74,6 +73,13 @@ class ExternalDependencyHealthIndicatorTest {
         doReturn(new HealthResponse(CustomStatus.DEGRADED.getCode())).when(externalDependencyHealthIndicator).getIntegrationHealth();
         Health health = externalDependencyHealthIndicator.health();
         assertEquals(CustomStatus.DEGRADED, health.getStatus());
+    }
+
+    @Test
+    void testHealthCheckNullBody() {
+        doReturn(null).when(externalDependencyHealthIndicator).getIntegrationHealth();
+        Health health = externalDependencyHealthIndicator.health();
+        assertEquals(CustomStatus.EXTERNAL_DEPENDENCY_DOWN, health.getStatus());
     }
 
     @Test

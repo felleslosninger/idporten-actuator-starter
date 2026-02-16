@@ -7,18 +7,17 @@ import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.actuate.health.Status;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClient;
 
 public class ExternalDependencyHealthIndicator implements HealthIndicator {
 
     private final Logger log = LoggerFactory.getLogger(ExternalDependencyHealthIndicator.class);
-    private final RestTemplate restTemplate;
+    private final RestClient restClient;
     private final HealthCheckEndpoint healthCheckEndpoint;
 
-    public ExternalDependencyHealthIndicator(RestTemplate restTemplate, HealthCheckEndpoint healthCheckEndpoint) {
-        this.restTemplate = restTemplate;
+    public ExternalDependencyHealthIndicator(RestClient restClient, HealthCheckEndpoint healthCheckEndpoint) {
+        this.restClient = restClient;
         this.healthCheckEndpoint = healthCheckEndpoint;
         log.info("Created health indicator for {}", healthCheckEndpoint.name());
     }
@@ -47,13 +46,11 @@ public class ExternalDependencyHealthIndicator implements HealthIndicator {
     }
 
     protected HealthResponse getIntegrationHealth() {
-        ResponseEntity<HealthResponse> forEntity = this.restTemplate.getForEntity(healthCheckEndpoint.endpoint(),
-                HealthResponse.class);
-        if (forEntity.getBody() != null) {
-            return forEntity.getBody();
-        } else {
-            return new HealthResponse(Status.DOWN.getCode());
-        }
+        HealthResponse body = this.restClient.get()
+                .uri(healthCheckEndpoint.endpoint())
+                .retrieve()
+                .body(HealthResponse.class);
+        return body != null ? body : new HealthResponse(Status.DOWN.getCode());
     }
 
     public String getName() {
