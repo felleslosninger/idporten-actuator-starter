@@ -1,0 +1,6 @@
+# .trivyignore
+GHSA-2m67-wjpj-xhg9 # jackson core fixed  │ 2.15.3            │ 2.15.3, 2.16.0, 2.17.0, 2.18.0, 2.19.0 │ Arbitrary code execution due to unsafe deserialization of untrusted data │
+CVE-2026-34483   # tomcat-embed-core fixed  │ 10.1.53           │ 9.0.116, 10.1.54, 11.0.21 │ Information disclosure due to  │
+CVE-2026-34487 # "
+CVE-2026-34483 # "
+CVE-2026-34487 # "
