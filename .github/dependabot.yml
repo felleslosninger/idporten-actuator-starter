@@ -8,4 +8,24 @@ updates:
   - package-ecosystem: "maven" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "daily"
+      interval: weekly
+      
+  # Spring Boot 3.x module
+  - package-ecosystem: maven
+    directory: "/idporten-actuator-starter"
+    schedule:
+      interval: weekly
+    labels:
+      - "spring-boot-3"
+    # Ignore major Spring Boot updates in this module
+    ignore:
+      - dependency-name: "org.springframework.boot:*"
+        update-types: ["version-update:semver-major"]
+
+  # Spring Boot 4.x module – update everything, open PRs immediately
+  - package-ecosystem: maven
+    directory: "/idporten-actuator-4-starter"
+    schedule:
+      interval: daily
+    labels:
+      - "spring-boot-4"
