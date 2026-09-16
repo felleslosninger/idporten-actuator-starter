@@ -2,30 +2,43 @@
 # package ecosystems to update and where the package manifests are located.
 # Please see the documentation for all configuration options:
 # https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+#
+# The three entries below have disjoint scopes to avoid duplicate PRs:
+# the root entry covers the whole multi-module reactor except Spring Boot,
+# while each module entry only manages its own Spring Boot version.
 
 version: 2
 updates:
-  - package-ecosystem: "maven" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  # Everything except Spring Boot (whole reactor: parent + both modules)
+  - package-ecosystem: maven
+    directory: "/"
     schedule:
       interval: weekly
-      
-  # Spring Boot 3.x module
+    ignore:
+      - dependency-name: "org.springframework.boot:*"
+
+  # Spring Boot 3.x module – only manage its Spring Boot version, stay on 3.x
   - package-ecosystem: maven
     directory: "/idporten-actuator-starter"
     schedule:
       interval: weekly
     labels:
       - "spring-boot-3"
-    # Ignore major Spring Boot updates in this module
+    allow:
+      - dependency-name: "org.springframework.boot:*"
     ignore:
       - dependency-name: "org.springframework.boot:*"
         update-types: ["version-update:semver-major"]
 
-  # Spring Boot 4.x module – update everything, open PRs immediately
+  # Spring Boot 4.x module – only manage its Spring Boot version, stay on 4.x
   - package-ecosystem: maven
     directory: "/idporten-actuator-4-starter"
     schedule:
       interval: daily
     labels:
       - "spring-boot-4"
+    allow:
+      - dependency-name: "org.springframework.boot:*"
+    ignore:
+      - dependency-name: "org.springframework.boot:*"
+        update-types: ["version-update:semver-major"]
