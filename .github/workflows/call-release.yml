@@ -6,9 +6,9 @@ on:
 
 jobs:
   call-workflow-maven-deploy:
-    uses: felleslosninger/github-workflows/.github/workflows/ci-maven-deploy.yml@main
+    uses: felleslosninger/github-workflows/.github/workflows/ci-build-publish-lib.yml@main
     permissions:
-      contents: write
+      contents: read
       packages: write
     with:
       java-version: 21
