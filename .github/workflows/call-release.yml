@@ -11,8 +11,6 @@ jobs:
       contents: read
       packages: write
     with:
-    # disabled due to rate-limiting
-      trivy-library-disable-scan: true
       java-version: 21
       package-version: ${{ github.event.release.tag_name }}
       deployment-repository: ${{ github.repository }}
